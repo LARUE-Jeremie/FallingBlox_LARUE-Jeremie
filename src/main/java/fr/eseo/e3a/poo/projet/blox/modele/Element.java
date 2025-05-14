@@ -1,7 +1,7 @@
 package fr.eseo.e3a.poo.projet.blox.modele;
 
 /**
- * Smallest in game element, part of a blox
+ * Smallest, in game, element. Part of a blox
  */
 public class Element {
     private Coordonnees coordonnees;

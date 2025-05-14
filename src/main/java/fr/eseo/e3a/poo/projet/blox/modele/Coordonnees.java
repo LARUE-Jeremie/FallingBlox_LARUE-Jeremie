@@ -8,17 +8,15 @@ public class Coordonnees {
     private int abscisse;
     private int ordonnee;
 
-
     /**
      * Coordonnees' constructor
-     * @param abscisse
-     * @param ordonnee
+     * @param abscisse x-coordinate position to set
+     * @param ordonnee y-coordinate to set
      */
     public Coordonnees(int abscisse, int ordonnee) {
         this.abscisse = abscisse;
         this.ordonnee = ordonnee;
     }
-
 
     public int getAbscisse() {
         return abscisse;
