@@ -38,7 +38,7 @@ public class Coordonnees {
 
     @Override
     public String toString() {
-        return "(" + abscisse + ", " + ordonnee + ")";
+        return "(" + this.abscisse + ", " + this.ordonnee + ")";
     }
 
     @Override
@@ -48,8 +48,8 @@ public class Coordonnees {
 
         Coordonnees coordonnees = (Coordonnees) obj;
         return (
-                this.getAbscisse() == coordonnees.getAbscisse() &&
-                this.getOrdonnee() == coordonnees.getOrdonnee()
+            this.getAbscisse() == coordonnees.getAbscisse() &&
+            this.getOrdonnee() == coordonnees.getOrdonnee()
         );
     }
 
