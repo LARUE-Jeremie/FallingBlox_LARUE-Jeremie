@@ -43,6 +43,9 @@ public class Coordonnees {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass()) return false;
+
         Coordonnees coordonnees = (Coordonnees) obj;
         return (
                 this.getAbscisse() == coordonnees.getAbscisse() &&
@@ -52,6 +55,6 @@ public class Coordonnees {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return java.util.Objects.hash(abscisse, ordonnee);
     }
 }
