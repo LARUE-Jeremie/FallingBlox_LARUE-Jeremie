@@ -8,13 +8,17 @@ import fr.eseo.e3a.poo.projet.blox.modele.Element;
  */
 public interface IPiece {
     /**
-     * @return The needed number of elements in the blox
+     * Get the required number of elements in the blox
+     * @return NB_REQUIRED_ELEMENTS : int
      */
-    int getNbElements();
+    int getNbRequiredElements();
+
     /**
-     * @return The list of elements in the blox
+     * Get the list of elements in the blox
+     * @return elements : Element[]
      */
     List<Element> getElements();
+
     /**
      * Set the position of a blox
      * @param abscisse x-coordinate position to set
