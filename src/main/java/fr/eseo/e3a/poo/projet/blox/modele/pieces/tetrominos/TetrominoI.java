@@ -4,6 +4,8 @@ import fr.eseo.e3a.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
 
+import java.util.List;
+
 public class TetrominoI extends Tetromino {
 
     public TetrominoI(Coordonnees coordonnees, Couleur couleur) {
@@ -22,7 +24,12 @@ public class TetrominoI extends Tetromino {
     }
 
     @Override
+    public List<Element> getElements() {
+        return super.getElements();
+    }
+
+    @Override
     public String toString() {
-        return null; // TODO
+        return "TetrominoI :\n" + super.toString();
     }
 }
