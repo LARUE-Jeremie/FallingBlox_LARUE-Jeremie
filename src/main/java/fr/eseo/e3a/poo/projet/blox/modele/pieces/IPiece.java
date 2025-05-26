@@ -1,6 +1,8 @@
 package fr.eseo.e3a.poo.projet.blox.modele.pieces;
 
 import java.util.List;
+
+import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
 import fr.eseo.e3a.poo.projet.blox.modele.Puits;
 
@@ -38,4 +40,16 @@ public interface IPiece {
      * @param puits the well
      */
     void setPuits(Puits puits);
+
+    /**
+     * Get the referent element of a blox
+     * @return
+     */
+    Element getReferentElement();
+
+    /**
+     * Get the default color of a blox
+     * @return
+     */
+    Couleur getDefaultColor();
 }
