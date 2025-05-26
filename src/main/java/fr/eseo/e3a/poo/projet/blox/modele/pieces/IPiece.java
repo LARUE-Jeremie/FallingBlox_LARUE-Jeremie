@@ -2,6 +2,7 @@ package fr.eseo.e3a.poo.projet.blox.modele.pieces;
 
 import java.util.List;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
+import fr.eseo.e3a.poo.projet.blox.modele.Puits;
 
 /**
  * Interface : any type of Blox
@@ -9,13 +10,13 @@ import fr.eseo.e3a.poo.projet.blox.modele.Element;
 public interface IPiece {
     /**
      * Get the required number of elements in the blox
-     * @return NB_REQUIRED_ELEMENTS : int
+     * @return the required number of elements
      */
     int getNbRequiredElements();
 
     /**
      * Get the list of elements in the blox
-     * @return elements : Element[]
+     * @return the list of elements
      */
     List<Element> getElements();
 
@@ -25,4 +26,16 @@ public interface IPiece {
      * @param ordonnee y-coordinate to set
      */
     void setPosition(int abscisse, int ordonnee);
+
+    /**
+     * Get the well; where the blox is
+     * @return the well
+     */
+    Puits getPuits();
+
+    /**
+     * Get the well; where the blox is
+     * @param puits the well
+     */
+    void setPuits(Puits puits);
 }
