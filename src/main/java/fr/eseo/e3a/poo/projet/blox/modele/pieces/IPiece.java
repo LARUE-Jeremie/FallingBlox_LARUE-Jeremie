@@ -1,7 +1,6 @@
 package fr.eseo.e3a.poo.projet.blox.modele.pieces;
 
 import java.util.List;
-
 import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
 import fr.eseo.e3a.poo.projet.blox.modele.Puits;

@@ -7,6 +7,10 @@ public enum ModesDeGeneration {
 
     private int id;
 
+    /**
+     * ModesDeGeneration's Constructor
+     * @param id number linked to a mode
+     */
     ModesDeGeneration(int id) {
         this.id = id;
     }

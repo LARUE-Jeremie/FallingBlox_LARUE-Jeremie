@@ -3,7 +3,6 @@ package fr.eseo.e3a.poo.projet.blox.modele.pieces.tetrominos;
 import fr.eseo.e3a.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
-
 import java.util.List;
 
 public class TetrominoO extends Tetromino {
@@ -11,6 +10,11 @@ public class TetrominoO extends Tetromino {
     private final Couleur defaultColor = Couleur.ROUGE;
     private Element referentElement;
 
+    /**
+     * Tetromino's Constructor
+     * @param coordonnees localisation of a blox
+     * @param couleur color of a blox
+     */
     public TetrominoO(Coordonnees coordonnees, Couleur couleur) {
         super(coordonnees, couleur);
     }

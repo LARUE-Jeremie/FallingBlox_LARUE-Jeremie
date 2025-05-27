@@ -1,7 +1,6 @@
 package fr.eseo.e3a.poo.projet.blox.modele;
 
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.tetrominos.*;
-
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;

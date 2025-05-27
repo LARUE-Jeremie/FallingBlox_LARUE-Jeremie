@@ -13,11 +13,19 @@ public class Puits {
     private IPiece pieceActuelle;
     private IPiece pieceSuivante;
 
+    /**
+     * Puits' Constructor
+     */
     public Puits() {
         this.largeur = LARGEUR_LIMITES.getDefault();
         this.profondeur = PROFONDEUR_LIMITES.getDefault();
     }
 
+    /**
+     * Puits' Constructor
+     * @param largeur width of a well
+     * @param profondeur height of a well
+     */
     public Puits(int largeur, int profondeur) {
         this.largeur = largeur;
         this.profondeur = profondeur;

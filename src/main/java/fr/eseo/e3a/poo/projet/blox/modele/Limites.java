@@ -5,6 +5,12 @@ public class Limites {
     private final int _default;
     private final int maximum;
 
+    /**
+     * Limites's Constructor
+     * @param minimum minimum value for the limites
+     * @param _default default value
+     * @param maximum maximum value for the limites
+     */
     public Limites(int minimum, int _default, int maximum) {
         this.minimum = minimum;
         this._default = _default;

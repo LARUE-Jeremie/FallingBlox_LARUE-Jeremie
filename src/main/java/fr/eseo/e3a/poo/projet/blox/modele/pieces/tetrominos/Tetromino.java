@@ -5,7 +5,6 @@ import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
 import fr.eseo.e3a.poo.projet.blox.modele.Puits;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +18,11 @@ public abstract class Tetromino implements IPiece {
     protected Coordonnees coordonnees;
     protected Puits puits;
 
+    /**
+     * Tetromino's Constructor
+     * @param coordonnees localisation of a blox
+     * @param couleur color of a blox
+     */
     public Tetromino(Coordonnees coordonnees, Couleur couleur) {
         this.elements = new ArrayList<>();
         setElements(coordonnees, couleur);
@@ -31,6 +35,11 @@ public abstract class Tetromino implements IPiece {
         }
     }
 
+    /**
+     * Set the elements of a blox
+     * @param coordonnees localisation of a blox
+     * @param couleur color of a blox
+     */
     protected abstract void setElements(Coordonnees coordonnees, Couleur couleur);
 
     @Override

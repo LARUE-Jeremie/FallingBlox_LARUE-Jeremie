@@ -7,21 +7,41 @@ public class Element {
     private Coordonnees coordonnees;
     private Couleur couleur;
 
+    /**
+     * Element's Constructor
+     * @param coordonnees localisation of an element
+     */
     public Element(Coordonnees coordonnees) {
         this.coordonnees = coordonnees;
     }
 
-    public Element(int abcisse, int ordonnee) {
-        this.coordonnees = new Coordonnees(abcisse, ordonnee);
+    /**
+     * Element's Constructor
+     * @param abscisse x-coordinate position to set
+     * @param ordonnee y-coordinate to set
+     */
+    public Element(int abscisse, int ordonnee) {
+        this.coordonnees = new Coordonnees(abscisse, ordonnee);
     }
 
+    /**
+     * Element's Constructor
+     * @param coordonnees localisation of an element
+     * @param couleur color of an element
+     */
     public Element(Coordonnees coordonnees, Couleur couleur) {
         this.coordonnees = coordonnees;
         this.couleur = couleur;
     }
 
-    public Element(int abcisse, int ordonnee, Couleur couleur) {
-        this.coordonnees = new Coordonnees(abcisse, ordonnee);
+    /**
+     * Element's Constructor
+     * @param abscisse x-coordinate position to set
+     * @param ordonnee y-coordinate to set
+     * @param couleur color of an element
+     */
+    public Element(int abscisse, int ordonnee, Couleur couleur) {
+        this.coordonnees = new Coordonnees(abscisse, ordonnee);
         this.couleur = couleur;
     }
 

@@ -36,7 +36,7 @@ class ElementTest {
     }
 
     @Test
-    void testConstructorWithAbcisseOrdonnee() {
+    void testConstructorWithAbscisseOrdonnee() {
         assertEquals(coord1, element4.getCoordonnees());
         assertEquals(couleur1, element4.getCouleur());
     }
