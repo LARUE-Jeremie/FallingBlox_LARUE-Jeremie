@@ -10,6 +10,7 @@ public class VuePuits extends JPanel {
     private Puits puits;
     private int taille;
     public static final int TAILLE_PAR_DEFAUT = 10;
+    private VuePiece vuePiece;
 
     /**
      * VuePuits' Constructor
@@ -42,6 +43,10 @@ public class VuePuits extends JPanel {
         return taille;
     }
 
+    public VuePiece getVuePiece() {
+        return this.vuePiece;
+    }
+
     /**
      * Set up the view of the well
      * @param puits the well
@@ -70,6 +75,10 @@ public class VuePuits extends JPanel {
         repaint();
     }
 
+    public void setVuePiece(VuePiece vuePiece) {
+        this.vuePiece = vuePiece;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -92,9 +101,12 @@ public class VuePuits extends JPanel {
         for (int x = 0; x <= largeur; x++) {
             g2D.drawLine(x * taille, 0, x * taille, profondeur * taille);
         }
-
         for (int y = 0; y <= profondeur; y++) {
             g2D.drawLine(0, y * taille, largeur * taille, y * taille);
+        }
+
+        if (vuePiece != null) {
+            vuePiece.afficherPiece(g2D);
         }
 
         /* Puis nous libérons la mémoire */
