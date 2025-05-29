@@ -1,6 +1,8 @@
 package fr.eseo.e3a.poo.projet.blox.modele;
 
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 /**
  * Well, used as a playground for the game and blox
@@ -12,23 +14,20 @@ public class Puits {
     private final Limites PROFONDEUR_LIMITES = new Limites(5, 10, 15);
     private IPiece pieceActuelle;
     private IPiece pieceSuivante;
+    private final PropertyChangeSupport pcs;
+    public static final String MODIFICATION_PIECE_ACTUELLE = "modificationPieceActuelle";
+    public static final String MODIFICATION_PIECE_SUIVANTE = "modificationPieceSuivante";
 
-    /**
-     * Puits' Constructor
-     */
     public Puits() {
         this.largeur = LARGEUR_LIMITES.getDefault();
         this.profondeur = PROFONDEUR_LIMITES.getDefault();
+        this.pcs = new PropertyChangeSupport(this);
     }
 
-    /**
-     * Puits' Constructor
-     * @param largeur width of a well
-     * @param profondeur height of a well
-     */
     public Puits(int largeur, int profondeur) {
         this.largeur = largeur;
         this.profondeur = profondeur;
+        this.pcs = new PropertyChangeSupport(this);
     }
 
     public IPiece getPieceActuelle() {
@@ -47,12 +46,19 @@ public class Puits {
         return largeur;
     }
 
-    public void setPieceSuivante(IPiece pieceSuivante) {
-        if (this.pieceSuivante != null) {
-            this.pieceActuelle = this.pieceSuivante;
-            this.pieceActuelle.setPosition(largeur/2, -4);
+    public void setPieceSuivante(IPiece nouvellePieceSuivante) {
+        IPiece anciennePieceActuelle = this.pieceActuelle;
+        IPiece anciennePieceSuivante = this.pieceSuivante;
+        this.pieceActuelle = anciennePieceSuivante;
+
+        if (this.pieceActuelle != null) {
+            this.pieceActuelle.setPuits(this);
+            this.pieceActuelle.setPosition(largeur / 2, -4);
         }
-        this.pieceSuivante = pieceSuivante;
+
+        pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, anciennePieceActuelle, this.pieceActuelle);
+        this.pieceSuivante = nouvellePieceSuivante;
+        pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, anciennePieceSuivante, this.pieceSuivante);
     }
 
     public void setProfondeur(int profondeur) {
@@ -71,19 +77,16 @@ public class Puits {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder
-            .append("Puits : Dimension ")
-            .append(largeur)
-            .append(" x ")
-            .append(profondeur)
-            .append("\n")
-            .append("Piece Actuelle : ")
-            .append(pieceActuelle != null ? pieceActuelle : "<aucune>")
-            .append("\n")
-            .append("Piece Actuelle : ")
-            .append(pieceSuivante != null ? pieceSuivante : "<aucune>")
-            .append("\n");
-        return stringBuilder.toString();
+        return "Puits : Dimension " + largeur + " x " + profondeur + "\n"
+                + "Piece Actuelle : " + (pieceActuelle != null ? pieceActuelle : "<aucune>") + "\n"
+                + "Piece Suivante : " + (pieceSuivante != null ? pieceSuivante : "<aucune>") + "\n";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(listener);
     }
 }

@@ -1,11 +1,14 @@
 package fr.eseo.e3a.poo.projet.blox.vue;
 
 import fr.eseo.e3a.poo.projet.blox.modele.Puits;
+import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class VuePuits extends JPanel {
+public class VuePuits extends JPanel implements PropertyChangeListener {
 
     private Puits puits;
     private int taille;
@@ -111,5 +114,20 @@ public class VuePuits extends JPanel {
 
         /* Puis nous libérons la mémoire */
         g2D.dispose();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (Puits.MODIFICATION_PIECE_ACTUELLE.equals(evt.getPropertyName())) {
+            IPiece nouvellePiece = (IPiece) evt.getNewValue();
+            if (nouvellePiece != null) {
+                setVuePiece(new VuePiece(nouvellePiece, taille));
+            } else {
+                // Si la nouvelle pièce est null, on efface la pièce affichée
+                vuePiece = null;
+                repaint();
+            }
+        }
+        // Pour l'instant, on ignore les changements MODIFICATION_PIECE_SUIVANTE
     }
 }

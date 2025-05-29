@@ -52,7 +52,7 @@ public class PuitsTest {
         Puits puits = new Puits();
         String attendu = "Puits : Dimension 10 x 10\n" +
                 "Piece Actuelle : <aucune>\n" +
-                "Piece Actuelle : <aucune>\n";
+                "Piece Suivante : <aucune>\n";
         assertEquals(attendu, puits.toString());
     }
 }
