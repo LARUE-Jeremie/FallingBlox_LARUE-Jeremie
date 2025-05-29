@@ -3,7 +3,7 @@ package fr.eseo.e3a.poo.projet.blox.modele;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
 
 /**
- * Well, used as a playground for blox
+ * Well, used as a playground for the game and blox
  */
 public class Puits {
     private int largeur;

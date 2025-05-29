@@ -6,16 +6,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Generating blox based on the selected mode
+ */
 public class UsineDePiece {
     private static int _mode = ModesDeGeneration.ALEATOIRE_PIECE.getId();
     private static int cyclicIndex = 0;
     private static final Random random = new Random();
-
     private static final int DEFAULT_ABSCISSE = 2;
     private static final int DEFAULT_ORDONNEE = 3;
-    // List of all the available colors
+
     private static final Couleur[] COULEURS = Couleur.values();
-    // List of all the Tetromino's class
     private static final List<Class<? extends Tetromino>> TETROMINO_CLASSES = Arrays.asList(
         TetrominoO.class,
         TetrominoI.class

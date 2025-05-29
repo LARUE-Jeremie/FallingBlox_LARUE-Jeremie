@@ -5,6 +5,9 @@ import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
 import java.util.List;
 
+/**
+ * Tetromino : I shape
+ */
 public class TetrominoO extends Tetromino {
 
     private final Couleur defaultColor = Couleur.ROUGE;

@@ -9,7 +9,6 @@ public class UsineDePieceTest {
 
     @BeforeEach
     public void resetMode() {
-        // Always reset mode before each test
         UsineDePiece.setMode(ModesDeGeneration.ALEATOIRE_PIECE.getId());
     }
 

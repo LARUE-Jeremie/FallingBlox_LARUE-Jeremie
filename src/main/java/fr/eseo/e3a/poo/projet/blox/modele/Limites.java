@@ -1,5 +1,8 @@
 package fr.eseo.e3a.poo.projet.blox.modele;
 
+/**
+ * Set up limits' values for well
+ */
 public class Limites {
     private final int minimum;
     private final int _default;
