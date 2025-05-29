@@ -1,8 +1,8 @@
 package fr.eseo.e3a.poo.projet.blox.vue;
 
+import fr.eseo.e3a.poo.projet.blox.controleur.PieceDeplacement;
 import fr.eseo.e3a.poo.projet.blox.modele.Puits;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
-
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
@@ -14,6 +14,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     private int taille;
     public static final int TAILLE_PAR_DEFAUT = 10;
     private VuePiece vuePiece;
+    private PieceDeplacement pieceDeplacement;
 
     /**
      * VuePuits' Constructor
@@ -21,6 +22,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      */
     public VuePuits(Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
+        this.setBackground(Color.WHITE);
     }
 
     /**
@@ -36,6 +38,19 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             taille * puits.getLargeur(),
             taille * puits.getProfondeur()
         ));
+        this.pieceDeplacement = new PieceDeplacement(this);
+        this.addMouseMotionListener(pieceDeplacement);
+        puits.addPropertyChangeListener(evt -> {
+            if (Puits.MODIFICATION_PIECE_ACTUELLE.equals(evt.getPropertyName())) {
+                IPiece nouvellePiece = (IPiece) evt.getNewValue();
+                if (nouvellePiece != null) {
+                    this.vuePiece = new VuePiece(nouvellePiece, this.taille);
+                } else {
+                    this.vuePiece = null;
+                }
+                repaint();
+            }
+        });
     }
 
     public Puits getPuits() {
@@ -60,6 +75,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             taille * puits.getLargeur(),
             taille * puits.getProfondeur()
         ));
+        if (pieceDeplacement != null) {
+            pieceDeplacement.setVuePuits(this);
+        }
         revalidate();
         repaint();
     }

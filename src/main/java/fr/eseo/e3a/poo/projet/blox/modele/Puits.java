@@ -12,6 +12,7 @@ public class Puits {
     private int profondeur;
     private final Limites LARGEUR_LIMITES = new Limites(5, 10, 15);
     private final Limites PROFONDEUR_LIMITES = new Limites(5, 10, 15);
+    private final int SPAWN_POINT = -4;
     private IPiece pieceActuelle;
     private IPiece pieceSuivante;
     private final PropertyChangeSupport pcs;
@@ -50,12 +51,10 @@ public class Puits {
         IPiece anciennePieceActuelle = this.pieceActuelle;
         IPiece anciennePieceSuivante = this.pieceSuivante;
         this.pieceActuelle = anciennePieceSuivante;
-
         if (this.pieceActuelle != null) {
             this.pieceActuelle.setPuits(this);
-            this.pieceActuelle.setPosition(largeur / 2, -4);
+            this.pieceActuelle.setPosition(largeur/2, SPAWN_POINT);
         }
-
         pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, anciennePieceActuelle, this.pieceActuelle);
         this.pieceSuivante = nouvellePieceSuivante;
         pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, anciennePieceSuivante, this.pieceSuivante);
