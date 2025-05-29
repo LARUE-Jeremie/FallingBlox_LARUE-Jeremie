@@ -83,4 +83,14 @@ public class Element {
     public int hashCode() {
         return java.util.Objects.hash(coordonnees, couleur);
     }
+
+    /**
+     * Make a move on an element
+     * @param deltaX x-coordinate vector
+     * @param deltaY y-coordinate vector
+     */
+    public void deplacerDe(int deltaX, int deltaY) {
+        this.coordonnees.setAbscisse(this.coordonnees.getAbscisse() + deltaX);
+        this.coordonnees.setOrdonnee(this.coordonnees.getOrdonnee() + deltaY);
+    }
 }

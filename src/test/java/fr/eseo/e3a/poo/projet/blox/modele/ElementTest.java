@@ -70,4 +70,19 @@ class ElementTest {
         assertEquals(element1.hashCode(), element2.hashCode());
         assertNotEquals(element1.hashCode(), element3.hashCode());
     }
+
+    @Test
+    void testDeplacerDeValideHorizontal() {
+        element1.deplacerDe(3, 0);
+        assertEquals(new Coordonnees(8, 10), element1.getCoordonnees());
+
+        element1.deplacerDe(-5, 0);
+        assertEquals(new Coordonnees(3, 10), element1.getCoordonnees());
+    }
+
+    @Test
+    void testDeplacerDeValideVertical() {
+        element1.deplacerDe(0, 4);
+        assertEquals(new Coordonnees(5, 14), element1.getCoordonnees());
+    }
 }

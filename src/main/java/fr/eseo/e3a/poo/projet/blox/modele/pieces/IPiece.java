@@ -51,4 +51,17 @@ public interface IPiece {
      * @return
      */
     Couleur getDefaultColor();
+
+    /**
+     * Make a move on a blox
+     * @param deltaX x-coordinate vector
+     * @param deltaY y-coordinate vector
+     */
+    void deplacerDe(int deltaX, int deltaY) throws IllegalArgumentException;
+
+    /**
+     * Make a rotation on a blox
+     * @param sensHoraire the rotation's direction
+     */
+    void tourner(boolean sensHoraire);
 }

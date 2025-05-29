@@ -123,11 +123,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             if (nouvellePiece != null) {
                 setVuePiece(new VuePiece(nouvellePiece, taille));
             } else {
-                // Si la nouvelle pièce est null, on efface la pièce affichée
                 vuePiece = null;
                 repaint();
             }
         }
-        // Pour l'instant, on ignore les changements MODIFICATION_PIECE_SUIVANTE
     }
 }

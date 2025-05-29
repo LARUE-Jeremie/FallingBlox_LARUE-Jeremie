@@ -6,6 +6,7 @@ import fr.eseo.e3a.poo.projet.blox.modele.Element;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,5 +43,35 @@ public class TetrominoOTest {
         assertTrue(result.contains("    (6, 4) - CYAN"));
         assertTrue(result.contains("    (7, 4) - CYAN"));
         assertTrue(result.contains("    (7, 5) - CYAN"));
+    }
+
+    @Test
+    void testDeplacementValide() {
+        TetrominoO t = new TetrominoO(new Coordonnees(0, 0), Couleur.JAUNE);
+        t.deplacerDe(1, 0); // droite
+        assertEquals(new Coordonnees(1, 0), t.getReferentElement().getCoordonnees());
+    }
+
+    @Test
+    void testDeplacementInvalide() {
+        TetrominoO t = new TetrominoO(new Coordonnees(0, 0), Couleur.JAUNE);
+        assertThrows(IllegalArgumentException.class, () -> t.deplacerDe(1, -1)); // diagonale
+        assertThrows(IllegalArgumentException.class, () -> t.deplacerDe(0, -1)); // vers le haut
+    }
+
+    @Test
+    public void testRotationNeChangeRien() {
+        TetrominoO piece = new TetrominoO(new Coordonnees(5, 5), Couleur.CYAN);
+        List<Element> elementsAvant = piece.getElements().stream()
+                .map(e -> new Element(e.getCoordonnees().getAbscisse(), e.getCoordonnees().getOrdonnee(), e.getCouleur()))
+                .collect(Collectors.toList());
+        piece.tourner(true);
+        piece.tourner(false);
+        List<Element> elementsApres = piece.getElements();
+
+        for (int i = 0; i < elementsAvant.size(); i++) {
+            assertEquals(elementsAvant.get(i).getCoordonnees().getAbscisse(), elementsApres.get(i).getCoordonnees().getAbscisse());
+            assertEquals(elementsAvant.get(i).getCoordonnees().getOrdonnee(), elementsApres.get(i).getCoordonnees().getOrdonnee());
+        }
     }
 }

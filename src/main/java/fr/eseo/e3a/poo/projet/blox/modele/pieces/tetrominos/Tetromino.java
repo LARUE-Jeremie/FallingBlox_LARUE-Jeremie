@@ -82,4 +82,55 @@ public abstract class Tetromino implements IPiece {
         }
         return stringBuilder.toString();
     }
+
+    @Override
+    public void deplacerDe(int deltaX, int deltaY) throws IllegalArgumentException {
+        boolean deplacementHorizontal = (deltaX != 0 && deltaY == 0);
+        boolean deplacementVertical = (deltaX == 0 && deltaY > 0);
+        if (!deplacementHorizontal && !deplacementVertical) {
+            throw new IllegalArgumentException(
+                    "Déplacement invalide, uniquement autorisé :\n" +
+                    "horizontale vers la gauche\n" +
+                    "horizontale vers la droite\n" +
+                    "verticale vers le bas."
+            );
+        }
+
+        for (Element element : elements) {
+            element.deplacerDe(deltaX, deltaY);
+        }
+    }
+
+    @Override
+    public void tourner(boolean sensHoraire) {
+        Element referent = getReferentElement();
+        int xRef = referent.getCoordonnees().getAbscisse();
+        int yRef = referent.getCoordonnees().getOrdonnee();
+
+        for (Element element : elements) {
+            if (element != referent) {
+                int x = element.getCoordonnees().getAbscisse();
+                int y = element.getCoordonnees().getOrdonnee();
+
+                // 1. Translater au pivot
+                int dx = x - xRef;
+                int dy = y - yRef;
+
+                // 2. Rotation
+                int xRot, yRot;
+                if (sensHoraire) {
+                    xRot = dy;
+                    yRot = -dx;
+                } else {
+                    xRot = -dy;
+                    yRot = dx;
+                }
+
+                // 3. Retranslation
+                element.getCoordonnees().setAbscisse(xRef + xRot);
+                element.getCoordonnees().setOrdonnee(yRef + yRot);
+            }
+        }
+    }
+
 }

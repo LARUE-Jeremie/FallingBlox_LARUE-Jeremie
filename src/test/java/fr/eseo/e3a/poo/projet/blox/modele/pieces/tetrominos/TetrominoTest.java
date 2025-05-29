@@ -48,4 +48,53 @@ public class TetrominoTest {
         assertTrue(str.contains("("));
         assertTrue(str.contains(") - "));
     }
+
+    @Test
+    public void testDeplacementValideDroite() {
+        Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
+        tetromino.deplacerDe(1, 0);
+        for (Element e : tetromino.getElements()) {
+            assertTrue(e.getCoordonnees().getAbscisse() >= 2, "Déplacement vers la droite incorrect");
+        }
+    }
+
+    @Test
+    public void testDeplacementValideGauche() {
+        Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
+        tetromino.deplacerDe(-1, 0);
+        for (Element e : tetromino.getElements()) {
+            assertTrue(e.getCoordonnees().getAbscisse() <= 2, "Déplacement vers la gauche incorrect");
+        }
+    }
+
+    @Test
+    public void testDeplacementValideBas() {
+        Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
+        tetromino.deplacerDe(0, 1);
+        for (Element e : tetromino.getElements()) {
+            assertTrue(e.getCoordonnees().getOrdonnee() >= 2, "Déplacement vers le bas incorrect");
+        }
+    }
+
+    @Test
+    public void testDeplacementInvalideHaut() {
+        Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(0, -1),
+                "Déplacement vers le haut devrait lancer une exception");
+    }
+
+    @Test
+    public void testDeplacementInvalideDiagonaleBasDroite() {
+        Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(1, 1),
+                "Déplacement diagonal devrait lancer une exception");
+    }
+
+    @Test
+    public void testDeplacementInvalideDiagonaleHautGauche() {
+        Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(-1, -1),
+                "Déplacement diagonal devrait lancer une exception");
+    }
+
 }
