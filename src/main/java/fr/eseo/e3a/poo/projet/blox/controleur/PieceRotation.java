@@ -6,13 +6,24 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Manages blox's rotations
+ */
 public class PieceRotation extends MouseAdapter {
     private final VuePuits vuePuits;
 
+    /**
+     * PieceRotation's Constructor
+     * @param vuePuits
+     */
     public PieceRotation(VuePuits vuePuits) {
         this.vuePuits = vuePuits;
     }
 
+    /**
+     * Manages the mouse's click
+     * @param e the event to be processed
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         IPiece piece = vuePuits.getPuits().getPieceActuelle();

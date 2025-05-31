@@ -18,17 +18,27 @@ public class Puits {
     private final PropertyChangeSupport pcs;
     public static final String MODIFICATION_PIECE_ACTUELLE = "modificationPieceActuelle";
     public static final String MODIFICATION_PIECE_SUIVANTE = "modificationPieceSuivante";
+    private Tas tas;
 
     public Puits() {
         this.largeur = LARGEUR_LIMITES.getDefault();
         this.profondeur = PROFONDEUR_LIMITES.getDefault();
         this.pcs = new PropertyChangeSupport(this);
+        this.tas = new Tas(this);
     }
 
     public Puits(int largeur, int profondeur) {
         this.largeur = largeur;
         this.profondeur = profondeur;
         this.pcs = new PropertyChangeSupport(this);
+        this.tas = new Tas(this);
+    }
+
+    public Puits(int largeur, int profondeur, int nbElements, int nbLignes) {
+        this.setLargeur(largeur);
+        this.setProfondeur(profondeur);
+        this.pcs = new PropertyChangeSupport(this);
+        this.tas = new Tas(this, nbElements, nbLignes);
     }
 
     public IPiece getPieceActuelle() {
@@ -88,4 +98,13 @@ public class Puits {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
+
+    public Tas getTas() {
+        return this.tas;
+    }
+
+    public void setTas(Tas tas) {
+        this.tas = tas;
+    }
+
 }

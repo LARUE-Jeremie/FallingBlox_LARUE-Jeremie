@@ -8,15 +8,26 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 
+/**
+ * Manages blox's movements
+ */
 public class PieceDeplacement extends MouseAdapter implements MouseMotionListener {
 
     private VuePuits vuePuits;
     private Integer derniereColonne = null;
 
+    /**
+     * PieceDeplacement's Constructor
+     * @param vuePuits
+     */
     public PieceDeplacement(VuePuits vuePuits) {
         this.vuePuits = vuePuits;
     }
 
+    /**
+     * Manages the mouse's movement
+     * @param e the event to be processed
+     */
     @Override
     public void mouseMoved(MouseEvent e) {
         Puits puits = vuePuits.getPuits();
@@ -45,6 +56,10 @@ public class PieceDeplacement extends MouseAdapter implements MouseMotionListene
         this.vuePuits = vuePuits;
     }
 
+    /**
+     * Manages the wheel's movement
+     * @param e the event to be processed
+     */
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         if (e.getWheelRotation() > 0) {
