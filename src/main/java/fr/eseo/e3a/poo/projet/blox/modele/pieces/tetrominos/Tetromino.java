@@ -132,5 +132,4 @@ public abstract class Tetromino implements IPiece {
             }
         }
     }
-
 }

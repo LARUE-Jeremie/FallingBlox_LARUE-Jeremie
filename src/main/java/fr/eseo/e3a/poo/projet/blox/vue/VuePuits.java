@@ -40,6 +40,8 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         ));
         this.pieceDeplacement = new PieceDeplacement(this);
         this.addMouseMotionListener(pieceDeplacement);
+        this.addMouseListener(pieceDeplacement);
+        this.addMouseWheelListener(pieceDeplacement);
         puits.addPropertyChangeListener(evt -> {
             if (Puits.MODIFICATION_PIECE_ACTUELLE.equals(evt.getPropertyName())) {
                 IPiece nouvellePiece = (IPiece) evt.getNewValue();

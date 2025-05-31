@@ -7,7 +7,7 @@ import java.util.List;
 import java.awt.*;
 
 public class VuePiece {
-    public static final double MULTIPLIER_TEINTE = 0.4;
+    public static final double MULTIPLIER_TEINTE = 0.7;
     private final IPiece piece;
     private final int taille;
 
@@ -51,7 +51,7 @@ public class VuePiece {
             int y = e.getCoordonnees().getOrdonnee() * taille;
 
             Color couleur = e.getCouleur().getCouleurPourAffichage();
-            g2D.setColor(i == 0 ? teinte(couleur) : couleur);
+            g2D.setColor(e == piece.getReferentElement() ? teinte(couleur) : couleur);
             g2D.fill3DRect(x, y, taille, taille, true);
         }
     }

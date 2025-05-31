@@ -3,10 +3,12 @@ package fr.eseo.e3a.poo.projet.blox.controleur;
 import fr.eseo.e3a.poo.projet.blox.vue.VuePuits;
 import fr.eseo.e3a.poo.projet.blox.modele.Puits;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
 
-public class PieceDeplacement implements MouseMotionListener {
+public class PieceDeplacement extends MouseAdapter implements MouseMotionListener {
 
     private VuePuits vuePuits;
     private Integer derniereColonne = null;
@@ -35,14 +37,32 @@ public class PieceDeplacement implements MouseMotionListener {
         }
     }
 
-
-
     @Override
     public void mouseDragged(MouseEvent e) {
-        // Pour l'instant on ne fait rien
     }
 
     public void setVuePuits(VuePuits vuePuits) {
         this.vuePuits = vuePuits;
     }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e.getWheelRotation() > 0) {
+            IPiece piece = vuePuits.getPuits().getPieceActuelle();
+            if (piece != null) {
+                try {
+                    piece.deplacerDe(0, 1);
+                    vuePuits.repaint();
+                } catch (IllegalArgumentException ex) {
+                    // ignore exception
+                }
+            }
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        derniereColonne = null;
+    }
+
 }
