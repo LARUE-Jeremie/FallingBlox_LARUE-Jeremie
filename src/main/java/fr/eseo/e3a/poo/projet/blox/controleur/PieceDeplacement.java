@@ -1,5 +1,6 @@
 package fr.eseo.e3a.poo.projet.blox.controleur;
 
+import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
 import fr.eseo.e3a.poo.projet.blox.vue.VuePuits;
 import fr.eseo.e3a.poo.projet.blox.modele.Puits;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
@@ -44,6 +45,8 @@ public class PieceDeplacement extends MouseAdapter implements MouseMotionListene
                 vuePuits.repaint();
             } catch (IllegalArgumentException ex) {
                 // ignore exception
+            } catch (BloxException ex) {
+                throw new RuntimeException(ex);
             }
         }
     }
@@ -70,6 +73,8 @@ public class PieceDeplacement extends MouseAdapter implements MouseMotionListene
                     vuePuits.repaint();
                 } catch (IllegalArgumentException ex) {
                     // ignore exception
+                } catch (BloxException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         }

@@ -1,6 +1,8 @@
 package fr.eseo.e3a.poo.projet.blox.modele.pieces;
 
 import java.util.List;
+
+import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
 import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
 import fr.eseo.e3a.poo.projet.blox.modele.Puits;
@@ -9,6 +11,7 @@ import fr.eseo.e3a.poo.projet.blox.modele.Puits;
  * Interface : any type of Blox
  */
 public interface IPiece {
+
     /**
      * Get the required number of elements in the blox
      * @return the required number of elements
@@ -57,11 +60,11 @@ public interface IPiece {
      * @param deltaX x-coordinate vector
      * @param deltaY y-coordinate vector
      */
-    void deplacerDe(int deltaX, int deltaY) throws IllegalArgumentException;
+    void deplacerDe(int deltaX, int deltaY) throws IllegalArgumentException, BloxException;
 
     /**
      * Make a rotation on a blox
      * @param sensHoraire the rotation's direction
      */
-    void tourner(boolean sensHoraire);
+    void tourner(boolean sensHoraire) throws IllegalArgumentException, BloxException;
 }

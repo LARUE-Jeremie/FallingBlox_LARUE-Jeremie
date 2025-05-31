@@ -44,7 +44,7 @@ public class PuitsTest {
     @Test
     public void testSetProfondeurInvalide() {
         Puits puits = new Puits();
-        assertThrows(IllegalArgumentException.class, () -> puits.setProfondeur(20)); // max = 15
+        assertThrows(IllegalArgumentException.class, () -> puits.setProfondeur(20));
     }
 
     @Test

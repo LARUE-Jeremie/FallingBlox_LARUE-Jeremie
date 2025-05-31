@@ -9,7 +9,7 @@ import fr.eseo.e3a.poo.projet.blox.vue.VuePiece;
 import fr.eseo.e3a.poo.projet.blox.vue.VuePuits;
 import javax.swing.*;
 
-public class PieceRotationTest {
+public class PieceDeplacementRotationTest {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

@@ -53,7 +53,7 @@ public class VuePieceTest {
         fenetre.setVisible(true);
 
         try {
-            Thread.sleep(3000); // 3 secondes
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

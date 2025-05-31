@@ -1,5 +1,6 @@
 package fr.eseo.e3a.poo.projet.blox.modele.pieces.tetrominos;
 
+import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
 import fr.eseo.e3a.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3a.poo.projet.blox.modele.Element;
@@ -84,25 +85,42 @@ public abstract class Tetromino implements IPiece {
     }
 
     @Override
-    public void deplacerDe(int deltaX, int deltaY) throws IllegalArgumentException {
+    public void deplacerDe(int deltaX, int deltaY) throws IllegalArgumentException, BloxException {
         boolean deplacementHorizontal = (deltaX != 0 && deltaY == 0);
         boolean deplacementVertical = (deltaX == 0 && deltaY > 0);
         if (!deplacementHorizontal && !deplacementVertical) {
             throw new IllegalArgumentException(
                     "Déplacement invalide, uniquement autorisé :\n" +
-                    "horizontale vers la gauche\n" +
-                    "horizontale vers la droite\n" +
-                    "verticale vers le bas."
+                            "horizontale vers la gauche/droite\n" +
+                            "verticale vers le bas."
             );
         }
-
+        Puits puits = getPuits();
+        if (puits != null) {
+            int largeur = puits.getLargeur();
+            int profondeur = puits.getProfondeur();
+            List<Element> elementsTas = puits.getTas().getElements();
+            for (Element element : elements) {
+                int newX = element.getCoordonnees().getAbscisse() + deltaX;
+                int newY = element.getCoordonnees().getOrdonnee() + deltaY;
+                if (newX < 0 || newX >= largeur || newY >= profondeur) {
+                    throw new BloxException("La pièce sort du puits", BloxException.BLOX_SORTIE_PUITS);
+                }
+                for (Element tasElement : elementsTas) {
+                    if (tasElement.getCoordonnees().getAbscisse() == newX &&
+                            tasElement.getCoordonnees().getOrdonnee() == newY) {
+                        throw new BloxException("Collision avec un élément du tas", BloxException.BLOX_COLLISION);
+                    }
+                }
+            }
+        }
         for (Element element : elements) {
             element.deplacerDe(deltaX, deltaY);
         }
     }
 
     @Override
-    public void tourner(boolean sensHoraire) {
+    public void tourner(boolean sensHoraire) throws IllegalArgumentException, BloxException {
         Element referent = getReferentElement();
         int xRef = referent.getCoordonnees().getAbscisse();
         int yRef = referent.getCoordonnees().getOrdonnee();

@@ -1,13 +1,11 @@
 package fr.eseo.e3a.poo.projet.blox.modele.pieces.tetrominos;
 
-import fr.eseo.e3a.poo.projet.blox.modele.Coordonnees;
-import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
-import fr.eseo.e3a.poo.projet.blox.modele.Element;
+import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
+import fr.eseo.e3a.poo.projet.blox.modele.*;
+import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TetrominoITest {
@@ -45,26 +43,26 @@ public class TetrominoITest {
     }
 
     @Test
-    void testDeplacementValide() {
-        TetrominoI t = new TetrominoI(new Coordonnees(3, 3), Couleur.VERT);
-        t.deplacerDe(0, 1); // bas
-        assertEquals(new Coordonnees(3, 4), t.getReferentElement().getCoordonnees());
+    void testDeplacementValide() throws BloxException {
+        TetrominoI tetromino = new TetrominoI(new Coordonnees(3, 3), Couleur.VERT);
+        tetromino.deplacerDe(0, 1);
+        assertEquals(new Coordonnees(3, 4), tetromino.getReferentElement().getCoordonnees());
     }
 
     @Test
     void testDeplacementInvalide() {
-        TetrominoI t = new TetrominoI(new Coordonnees(3, 3), Couleur.VERT);
-        assertThrows(IllegalArgumentException.class, () -> t.deplacerDe(-1, -1)); // diagonale
-        assertThrows(IllegalArgumentException.class, () -> t.deplacerDe(0, -1));  // haut
+        TetrominoI tetromino = new TetrominoI(new Coordonnees(3, 3), Couleur.VERT);
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(-1, -1));
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(0, -1));
     }
 
     @Test
-    public void testRotationHoraire() {
+    public void testRotationHoraire() throws BloxException {
         TetrominoI tetromino = new TetrominoI(new Coordonnees(5, 5), Couleur.ORANGE);
         List<Element> elementsAvant = tetromino.getElements().stream()
                 .map(e -> new Element(e.getCoordonnees().getAbscisse(), e.getCoordonnees().getOrdonnee(), e.getCouleur()))
                 .collect(Collectors.toList());
-        tetromino.tourner(true); // rotation horaire
+        tetromino.tourner(true);
         List<Element> elementsApres = tetromino.getElements();
         assertEquals(elementsAvant.get(1).getCoordonnees(), tetromino.getReferentElement().getCoordonnees());
         boolean auMoinsUnDifferent = false;
@@ -78,7 +76,7 @@ public class TetrominoITest {
     }
 
     @Test
-    public void testRotationAntiHoraire() {
+    public void testRotationAntiHoraire() throws BloxException {
         TetrominoI tetromino = new TetrominoI(new Coordonnees(5, 5), Couleur.ORANGE);
         List<Element> elementsAvant = tetromino.getElements().stream()
                 .map(e -> new Element(e.getCoordonnees().getAbscisse(), e.getCoordonnees().getOrdonnee(), e.getCouleur()))
@@ -97,12 +95,37 @@ public class TetrominoITest {
     }
 
     @Test
-    public void testRotationNeModifiePasLeReferent() {
+    public void testRotationNeModifiePasLeReferent() throws BloxException {
         TetrominoI tetromino = new TetrominoI(new Coordonnees(5, 5), Couleur.ORANGE);
         Coordonnees coordReferentAvant = tetromino.getReferentElement().getCoordonnees();
         tetromino.tourner(true);
         assertEquals(coordReferentAvant, tetromino.getReferentElement().getCoordonnees());
         tetromino.tourner(false);
         assertEquals(coordReferentAvant, tetromino.getReferentElement().getCoordonnees());
+    }
+
+    @Test
+    public void testDeplacementInvalideDiagonale() {
+        IPiece piece = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
+        assertThrows(IllegalArgumentException.class, () -> piece.deplacerDe(1, 1));
+    }
+
+    @Test
+    public void testDeplacementSortiePuits() throws BloxException {
+        Puits puits = new Puits(5, 10);
+        IPiece piece = new TetrominoO(new Coordonnees(3, 5), Couleur.BLEU);
+        puits.setPieceSuivante(piece);
+        puits.setPieceSuivante(new TetrominoO(new Coordonnees(0, 0), Couleur.ROUGE));
+        assertThrows(BloxException.class, () -> piece.deplacerDe(1, 0));
+    }
+
+    @Test
+    public void testDeplacementCollisionTas() throws BloxException {
+        Puits puits = new Puits(5, 10);
+        IPiece piece = new TetrominoI(new Coordonnees(2, 2), Couleur.BLEU);
+        puits.setPieceSuivante(piece);
+        puits.setPieceSuivante(piece);
+        puits.getTas().getElements().add(new Element(new Coordonnees(2, 3), Couleur.JAUNE));
+        assertThrows(BloxException.class, () -> piece.deplacerDe(0, 1));
     }
 }

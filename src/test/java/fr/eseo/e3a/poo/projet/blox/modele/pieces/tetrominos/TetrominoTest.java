@@ -1,5 +1,6 @@
 package fr.eseo.e3a.poo.projet.blox.modele.pieces.tetrominos;
 
+import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
 import fr.eseo.e3a.poo.projet.blox.modele.*;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -50,7 +51,7 @@ public class TetrominoTest {
     }
 
     @Test
-    public void testDeplacementValideDroite() {
+    public void testDeplacementValideDroite() throws BloxException {
         Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
         tetromino.deplacerDe(1, 0);
         for (Element e : tetromino.getElements()) {
@@ -59,7 +60,7 @@ public class TetrominoTest {
     }
 
     @Test
-    public void testDeplacementValideGauche() {
+    public void testDeplacementValideGauche() throws BloxException {
         Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
         tetromino.deplacerDe(-1, 0);
         for (Element e : tetromino.getElements()) {
@@ -68,7 +69,7 @@ public class TetrominoTest {
     }
 
     @Test
-    public void testDeplacementValideBas() {
+    public void testDeplacementValideBas() throws BloxException {
         Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
         tetromino.deplacerDe(0, 1);
         for (Element e : tetromino.getElements()) {

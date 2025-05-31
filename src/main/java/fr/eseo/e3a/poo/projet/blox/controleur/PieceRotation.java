@@ -1,5 +1,6 @@
 package fr.eseo.e3a.poo.projet.blox.controleur;
 
+import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
 import fr.eseo.e3a.poo.projet.blox.vue.VuePuits;
 import javax.swing.*;
@@ -38,6 +39,8 @@ public class PieceRotation extends MouseAdapter {
             vuePuits.repaint();
         } catch (IllegalArgumentException ex) {
             // ignore exception
+        } catch (BloxException ex) {
+            throw new RuntimeException(ex);
         }
     }
 }
