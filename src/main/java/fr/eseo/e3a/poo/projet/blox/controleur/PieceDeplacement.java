@@ -26,7 +26,7 @@ public class PieceDeplacement extends MouseAdapter implements MouseMotionListene
     }
 
     /**
-     * Manages the mouse's movement
+     * Manages the mouse's movement, follow the cursor
      * @param e the event to be processed
      */
     @Override

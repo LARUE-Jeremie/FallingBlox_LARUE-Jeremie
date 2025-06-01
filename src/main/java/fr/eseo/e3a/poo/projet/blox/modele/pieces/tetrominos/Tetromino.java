@@ -1,10 +1,7 @@
 package fr.eseo.e3a.poo.projet.blox.modele.pieces.tetrominos;
 
 import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
-import fr.eseo.e3a.poo.projet.blox.modele.Coordonnees;
-import fr.eseo.e3a.poo.projet.blox.modele.Couleur;
-import fr.eseo.e3a.poo.projet.blox.modele.Element;
-import fr.eseo.e3a.poo.projet.blox.modele.Puits;
+import fr.eseo.e3a.poo.projet.blox.modele.*;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,9 +83,7 @@ public abstract class Tetromino implements IPiece {
 
     @Override
     public void deplacerDe(int deltaX, int deltaY) throws IllegalArgumentException, BloxException {
-        boolean deplacementHorizontal = (deltaX != 0 && deltaY == 0);
-        boolean deplacementVertical = (deltaX == 0 && deltaY > 0);
-        if (!deplacementHorizontal && !deplacementVertical) {
+        if (deltaY < 0) {
             throw new IllegalArgumentException(
                     "Déplacement invalide, uniquement autorisé :\n" +
                             "horizontale vers la gauche/droite\n" +

@@ -1,5 +1,7 @@
 package fr.eseo.e3a.poo.projet.blox.modele;
 
+import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
+
 import java.util.*;
 
 public class Tas {
@@ -50,12 +52,35 @@ public class Tas {
         }
     }
 
-    // Accesseurs
     public Puits getPuits() {
         return this.puits;
     }
 
     public List<Element> getElements() {
         return this.elements;
+    }
+
+    public void ajouterElements(IPiece piece) {
+        this.elements.addAll(piece.getElements());
+    }
+
+    public boolean peutAjouter(IPiece piece) {
+        for (Element element : piece.getElements()) {
+            Coordonnees pos = element.getCoordonnees();
+            int x = pos.getAbscisse();
+            int y = pos.getOrdonnee();
+            if (x < 0 || x >= puits.getLargeur()) {
+                return false;
+            }
+            if (y < 0 || y >= puits.getProfondeur()) {
+                return false;
+            }
+            for (Element elTas : elements) {
+                if (elTas.getCoordonnees().equals(pos)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

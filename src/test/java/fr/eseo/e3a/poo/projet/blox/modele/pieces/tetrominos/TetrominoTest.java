@@ -85,13 +85,6 @@ public class TetrominoTest {
     }
 
     @Test
-    public void testDeplacementInvalideDiagonaleBasDroite() {
-        Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
-        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(1, 1),
-                "Déplacement diagonal devrait lancer une exception");
-    }
-
-    @Test
     public void testDeplacementInvalideDiagonaleHautGauche() {
         Tetromino tetromino = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
         assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(-1, -1),

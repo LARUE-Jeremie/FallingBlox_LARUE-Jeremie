@@ -1,5 +1,7 @@
 package fr.eseo.e3a.poo.projet.blox.modele;
 
+import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
+import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.tetrominos.TetrominoI;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

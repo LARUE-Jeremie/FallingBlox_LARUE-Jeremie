@@ -105,12 +105,6 @@ public class TetrominoITest {
     }
 
     @Test
-    public void testDeplacementInvalideDiagonale() {
-        IPiece piece = new TetrominoO(new Coordonnees(2, 2), Couleur.BLEU);
-        assertThrows(IllegalArgumentException.class, () -> piece.deplacerDe(1, 1));
-    }
-
-    @Test
     public void testDeplacementSortiePuits() throws BloxException {
         Puits puits = new Puits(5, 10);
         IPiece piece = new TetrominoO(new Coordonnees(3, 5), Couleur.BLEU);

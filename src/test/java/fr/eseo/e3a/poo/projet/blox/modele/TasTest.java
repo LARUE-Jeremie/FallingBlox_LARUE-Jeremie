@@ -1,5 +1,7 @@
 package fr.eseo.e3a.poo.projet.blox.modele;
 
+import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
+import fr.eseo.e3a.poo.projet.blox.modele.pieces.tetrominos.TetrominoI;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Random;
@@ -44,5 +46,15 @@ public class TasTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Tas(puits, 10, 1);
         });
+    }
+
+    @Test
+    public void testAjouterElements() {
+        Puits puits = new Puits();
+        Tas tas = puits.getTas();
+        assertEquals(0, tas.getElements().size());
+        IPiece piece = new TetrominoI(new Coordonnees(0, 0), Couleur.ROUGE);
+        tas.ajouterElements(piece);
+        assertEquals(piece.getNbRequiredElements(), tas.getElements().size());
     }
 }

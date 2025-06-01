@@ -21,6 +21,10 @@ public class VuePiece {
         this.taille = taille;
     }
 
+    public IPiece getPiece() {
+        return piece;
+    }
+
     /**
      * Changes the color of a blox
      * @param couleur color

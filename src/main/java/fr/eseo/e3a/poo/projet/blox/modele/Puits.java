@@ -1,5 +1,7 @@
 package fr.eseo.e3a.poo.projet.blox.modele;
 
+import fr.eseo.e3a.poo.projet.blox.controleur.Gravite;
+import fr.eseo.e3a.poo.projet.blox.exception.BloxException;
 import fr.eseo.e3a.poo.projet.blox.modele.pieces.IPiece;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -18,8 +20,11 @@ public class Puits {
     private final PropertyChangeSupport pcs;
     public static final String MODIFICATION_PIECE_ACTUELLE = "modificationPieceActuelle";
     public static final String MODIFICATION_PIECE_SUIVANTE = "modificationPieceSuivante";
-    private Tas tas;
+    private final Tas tas;
 
+    /**
+     * Puits' Constructor
+     */
     public Puits() {
         this.largeur = LARGEUR_LIMITES.getDefault();
         this.profondeur = PROFONDEUR_LIMITES.getDefault();
@@ -27,6 +32,11 @@ public class Puits {
         this.tas = new Tas(this);
     }
 
+    /**
+     * Puits' Constructor
+     * @param largeur width of the well
+     * @param profondeur deepness of the well
+     */
     public Puits(int largeur, int profondeur) {
         this.largeur = largeur;
         this.profondeur = profondeur;
@@ -34,6 +44,13 @@ public class Puits {
         this.tas = new Tas(this);
     }
 
+    /**
+     * Puits' Constructor
+     * @param largeur width of the well
+     * @param profondeur deepness of the well
+     * @param nbElements number of elements
+     * @param nbLignes number of lines
+     */
     public Puits(int largeur, int profondeur, int nbElements, int nbLignes) {
         this.setLargeur(largeur);
         this.setProfondeur(profondeur);
@@ -103,8 +120,54 @@ public class Puits {
         return this.tas;
     }
 
-    public void setTas(Tas tas) {
-        this.tas = tas;
+    /**
+     * Manage the collision
+     */
+    private void gererCollision() {
+        tas.ajouterElements(pieceActuelle);
+        setPieceSuivante(pieceSuivante);
     }
 
+    /**
+     * Use the gravity
+     */
+    public void gravite() throws BloxException {
+        if (pieceActuelle == null) {
+            return;
+        }
+        if (peutDeplacer(pieceActuelle, 0, 1)) {
+            pieceActuelle.deplacerDe(0, 1);
+            pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, null, pieceActuelle);
+        } else {
+            if (!tas.peutAjouter(pieceActuelle)) {
+                throw new BloxException("Impossible d'ajouter la pièce au tas.", 0);
+            }
+            tas.ajouterElements(pieceActuelle);
+            IPiece ancienne = pieceActuelle;
+            pieceActuelle = null;
+            pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, ancienne, null);
+
+            setPieceSuivante(pieceSuivante);
+            setPieceSuivante(UsineDePiece.genererTetromino());
+        }
+    }
+
+    public boolean peutDeplacer(IPiece piece, int deltaX, int deltaY) {
+        for (Element element : piece.getElements()) {
+            int x = element.getCoordonnees().getAbscisse() + deltaX;
+            int y = element.getCoordonnees().getOrdonnee() + deltaY;
+            // Hors limites du puits
+            if (x < 0 || x >= getLargeur() || y < 0 || y >= getProfondeur()) {
+                return false;
+            }
+            // Collision avec le tas
+            for (Element elTas : tas.getElements()) {
+                if (elTas.getCoordonnees().getAbscisse() == x &&
+                        elTas.getCoordonnees().getOrdonnee() == y) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
